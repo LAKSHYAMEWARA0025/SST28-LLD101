@@ -1,22 +1,22 @@
 import java.util.*;
 
 public class HostelFeeCalculator {
-    private final FakeBookingRepo repo;
+    // private final FakeBookingRepo repo;
 
-    public HostelFeeCalculator(FakeBookingRepo repo) { this.repo = repo; }
+    // public HostelFeeCalculator(FakeBookingRepo repo) { this.repo = repo; }
 
     // OCP violation: switch + add-on branching + printing + persistence.
-    public void process(BookingRequest req) {
-        Money monthly = calculateMonthly(req);
-        Money deposit = new Money(5000.00);
+    // public void process(BookingRequest req) {
+    //     Money monthly = calculateMonthly(req);
+    //     Money deposit = new Money(5000.00);//iska kaam hogya
 
-        ReceiptPrinter.print(req, monthly, deposit);
+    //     // ReceiptPrinter.print(req, monthly, deposit);
 
-        String bookingId = "H-" + (7000 + new Random(1).nextInt(1000)); // deterministic-ish
-        repo.save(bookingId, req, monthly, deposit);
-    }
+    //     String bookingId = "H-" + (7000 + new Random(1).nextInt(1000)); // deterministic-ish this also decoupled
+    //     repo.save(bookingId, req, monthly, deposit);//this is also decoupled 
+    // }
 
-    private Money calculateMonthly(BookingRequest req) { //I've changed the private to public, is it right?
+    public Money calculateMonthly(BookingRequest req) { //I've changed the private to public, is it right?
         // double base;
         // switch (req.roomType) {
         //     case LegacyRoomTypes.SINGLE -> base = 14000.0;
@@ -36,7 +36,7 @@ public class HostelFeeCalculator {
         Money total=req.getRoom().basePrice();
         List<AddOns> list=req.getAddOns();
         for(AddOns addon:list){
-            total.plus(addon.cost());
+            total=total.plus(addon.cost());
         }
         return total;
     }

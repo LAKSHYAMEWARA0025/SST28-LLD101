@@ -8,9 +8,9 @@ public class Main {
             new MessAddOn()
         );
         BookingRequest req = new BookingRequest(new DoubleRoom(), a);
-        HostelFeeCalculator calc = new HostelFeeCalculator(new FakeBookingRepo());
-        calc.process(req);
-        // String bookingId = "H-" + (7000 + new Random(1).nextInt(1000)); // deterministic-ish
-        // repo.save(bookingId, req, monthly, deposit);
+        // HostelFeeCalculator calc = new HostelFeeCalculator(new FakeBookingRepo());
+        // calc.process(req);
+        BookingService book=new BookingService(new HostelFeeCalculator(),new FakeBookingRepo(),new ReceiptPrinter(),new bookingId(),new FixedDepositPolicy());
+        book.process(req);
     }
 }
