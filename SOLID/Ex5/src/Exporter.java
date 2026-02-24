@@ -10,9 +10,11 @@ public abstract class Exporter {
         }
         String title=req.title==null?"":req.title;
         String body=req.body==null?"":req.body;
+        validate(title,body);
         String formatted=format(title,body);
         return new ExportResult(typeOfFile(), formatted.getBytes(StandardCharsets.UTF_8));
     };
+    protected void validate(String title,String body){};
     public abstract String format(String title,String body);
     public abstract String typeOfFile();
 }
