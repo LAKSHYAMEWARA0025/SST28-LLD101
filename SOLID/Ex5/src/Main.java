@@ -6,7 +6,7 @@ public class Main {
         Exporter pdf = new PdfExporter();
         Exporter csv = new CsvExporter();
         Exporter json = new JsonExporter();
-
+        //in pdf we have not defined any rules for character length in our exporter function as of now
         System.out.println("PDF: " + safe(pdf, req));
         System.out.println("CSV: " + safe(csv, req));
         System.out.println("JSON: " + safe(json, req));
