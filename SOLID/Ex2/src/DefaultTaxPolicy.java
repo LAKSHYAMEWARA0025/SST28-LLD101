@@ -1,4 +1,4 @@
-public class DefaultTaxPolicy implements TaxPolicy{
+public class DefaultTaxPolicy {
     public double taxPercent(){
         return 8.0;
     }

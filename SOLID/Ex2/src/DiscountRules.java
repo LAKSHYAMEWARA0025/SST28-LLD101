@@ -1,14 +1,14 @@
 public class DiscountRules {
-    public static double discountAmount(String customerType, double subtotal, int distinctLines) {
+    public DiscountPolicy discountAmount(String customerType) {
         // hard-coded policy (smell)
         if ("student".equalsIgnoreCase(customerType)) {
-            if (subtotal >= 180.0) return 10.0;
-            return 0.0;
+            return new StudentDiscountPolicy();
         }
         if ("staff".equalsIgnoreCase(customerType)) {
-            if (distinctLines >= 3) return 15.0;
-            return 5.0;
+            // if (distinctLines >= 3) return 15.0;
+            // return 5.0;
+            return new StaffDiscountPolicy();
         }
-        return 0.0;
+        return new DefaultDiscountPolicy();
     }
 }

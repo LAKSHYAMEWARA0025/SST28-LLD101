@@ -1,3 +1,3 @@
 public interface DiscountPolicy {
-    public double discountAmount( double subtotal, int distinctLines);
+    public double discount( double subtotal, int distinctLines);
 }
