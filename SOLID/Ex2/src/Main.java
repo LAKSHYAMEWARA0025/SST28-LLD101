@@ -3,7 +3,6 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== Cafeteria Billing ===");
-
         CafeteriaSystem sys = new CafeteriaSystem(new PricingEngine (),new  InvoiceFormatter(),new FileStore(),new TaxRules(),new DiscountRules());
         sys.addToMenu(new MenuItem("M1", "Veg Thali", 80.00));
         sys.addToMenu(new MenuItem("C1", "Coffee", 30.00));

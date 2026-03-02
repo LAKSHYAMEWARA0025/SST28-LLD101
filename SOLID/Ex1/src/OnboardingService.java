@@ -28,6 +28,7 @@ public class OnboardingService {
         //printing
         System.out.println("OK: created student " + id);
         System.out.println("Saved. Total students: " + repo.count());
+
         System.out.println("CONFIRMATION:");
         System.out.println(rec);
     }

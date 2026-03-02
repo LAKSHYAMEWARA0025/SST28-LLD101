@@ -7,6 +7,7 @@ public class Main {
         StudentValidator validator=new StudentValidator();
         OnboardingService svc = new OnboardingService(db,printer,parse,validator);
 
+
         String raw = "name=Riya;email=riya@sst.edu;phone=9876543210;program=CSE";
         svc.registerFromRawInput(raw);
 

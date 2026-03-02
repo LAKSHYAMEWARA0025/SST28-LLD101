@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class CafeteriaSystem {
+
     //menu mngmnt
     private final Map<String, MenuItem> menu = new LinkedHashMap<>();
     // private final FileStore store = new FileStore();
@@ -18,11 +19,13 @@ public class CafeteriaSystem {
         this.discountPolicy=discountPolicy;
     }
 
+
     public void addToMenu(MenuItem i) { menu.put(i.id, i); }
 
     // Intentionally SRP-violating: menu mgmt + tax + discount + format + persistence.
     public void checkout(String customerType, List<OrderLine> lines) {
         String invId = "INV-" + (++invoiceSeq);
+
         // StringBuilder out = new StringBuilder();
         // out.append("Invoice# ").append(invId).append("\n");
 
@@ -48,6 +51,7 @@ public class CafeteriaSystem {
         // out.append(String.format("TOTAL: %.2f\n", total));
 
         // String printable = InvoiceFormatter.identityFormat(out.toString());
+
         System.out.print(printable);
 
         store.save(invId, printable);

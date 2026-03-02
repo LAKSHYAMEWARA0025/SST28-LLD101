@@ -15,3 +15,4 @@ public abstract class NotificationSender {
     public abstract String addmsg();
 }
 //we need to implement rules over here 
+

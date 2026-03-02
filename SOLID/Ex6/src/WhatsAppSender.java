@@ -1,6 +1,5 @@
 public class WhatsAppSender extends NotificationSender {
     public WhatsAppSender(AuditLog audit) { super(audit); }
-
     // @Override
     // public void send(Notification n) {
     //     // LSP violation: tightens precondition
@@ -20,5 +19,6 @@ public class WhatsAppSender extends NotificationSender {
     }
     public void doSend(String subject,String body,String email,String phone){
         System.out.println("WA -> to=" + phone + " body=" + body);
+
     }
 }

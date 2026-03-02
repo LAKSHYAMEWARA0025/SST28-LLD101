@@ -1,5 +1,4 @@
 // import java.util.*;
-
 public class ReceiptPrinter {
     public void print(BookingRequest req, Money monthly, Money deposit) { //making this non-static
         // System.out.println("Room: " + req.name() + " | AddOns: " + req.addOns);

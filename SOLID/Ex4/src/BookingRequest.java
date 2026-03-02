@@ -17,4 +17,5 @@ public class BookingRequest {
     public String name(){
         return room.name();
     }
+
 }

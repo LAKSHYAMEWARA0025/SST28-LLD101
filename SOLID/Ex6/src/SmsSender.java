@@ -1,6 +1,5 @@
 public class SmsSender extends NotificationSender {
     public SmsSender(AuditLog audit) { super(audit); }
-
     // @Override
     // public void send(Notification n) {
     //     // Ignores subject; base type doesn't clarify expectations (smell)
@@ -12,5 +11,6 @@ public class SmsSender extends NotificationSender {
     }
     public void doSend(String subject,String body,String email,String phone){
         System.out.println("SMS -> to=" + phone + " body=" + body);
+
     }
 }

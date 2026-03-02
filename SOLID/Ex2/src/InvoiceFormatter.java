@@ -22,4 +22,5 @@ public class InvoiceFormatter {
         // System.out.print(printable);
         return out.toString();
     }
+
 }

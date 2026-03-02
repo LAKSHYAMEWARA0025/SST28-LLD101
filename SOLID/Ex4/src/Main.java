@@ -12,5 +12,6 @@ public class Main {
         // calc.process(req);
         BookingService book=new BookingService(new HostelFeeCalculator(),new FakeBookingRepo(),new ReceiptPrinter(),new bookingId(),new FixedDepositPolicy());
         book.process(req);
+
     }
 }

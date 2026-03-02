@@ -1,5 +1,4 @@
 // import java.nio.charset.StandardCharsets;
-
 public class CsvExporter extends Exporter {
     // @Override
     // public ExportResult export(ExportRequest req) {
@@ -13,5 +12,6 @@ public class CsvExporter extends Exporter {
     }
     public String format(String title,String body){
         return "title,body\n" + title + "," + body + "\n";
+
     }
 }

@@ -1,5 +1,4 @@
 import java.util.*;
-
 public class FakeDb implements StudentRepository {
     private final List<StudentRecord> rows = new ArrayList<>();
 
