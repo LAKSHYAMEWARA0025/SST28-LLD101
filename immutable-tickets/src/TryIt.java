@@ -25,9 +25,14 @@ public class TryIt {
         System.out.println("\nAfter service mutations: " + t);
 
         // Demonstrate external mutation via leaked list reference
-        List<String> tags = t.getTags();
-        tags.add("HACKED_FROM_OUTSIDE");
+        // List<String> tags = t.getTags();
+        // tags.add("HACKED_FROM_OUTSIDE");
         System.out.println("\nAfter external tag mutation: " + t);
+        try {
+            t.getTags().add("HACKED");
+        } catch (Exception e) {
+            System.out.println("\nTags are immutable!");
+        }
 
         // Starter compiles; after refactor, you should redesign updates to create new objects instead.
     }

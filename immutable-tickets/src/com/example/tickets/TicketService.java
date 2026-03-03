@@ -18,35 +18,44 @@ public class TicketService {
 
     public IncidentTicket createTicket(String id, String reporterEmail, String title) {
         // scattered validation (incomplete on purpose)
-        if (id == null || id.trim().isEmpty()) throw new IllegalArgumentException("id required");
-        if (reporterEmail == null || !reporterEmail.contains("@")) throw new IllegalArgumentException("email invalid");
-        if (title == null || title.trim().isEmpty()) throw new IllegalArgumentException("title required");
+        // if (id == null || id.trim().isEmpty()) throw new IllegalArgumentException("id required");
+        // if (reporterEmail == null || !reporterEmail.contains("@")) throw new IllegalArgumentException("email invalid");
+        // if (title == null || title.trim().isEmpty()) throw new IllegalArgumentException("title required");
 
-        IncidentTicket t = new IncidentTicket(id, reporterEmail, title);
-
+        // IncidentTicket t = new IncidentTicket(id, reporterEmail, title);
         // BAD: mutating after creation
-        t.setPriority("MEDIUM");
-        t.setSource("CLI");
-        t.setCustomerVisible(false);
+        // t.setPriority("MEDIUM");
+        // t.setSource("CLI");
+        // t.setCustomerVisible(false);
 
         List<String> tags = new ArrayList<>();
         tags.add("NEW");
-        t.setTags(tags);
+        // t.setTags(tags);
 
-        return t;
+        // return t;
+        // Builder b=new Builder();
+
+        return new IncidentTicket.Builder(id,reporterEmail,title).setTags(tags).build();
+        //earlier I was getting an error over here such that because my builder class was not static hence inner class was inaccessible 
+        //without creating an instance of the outer class
     }
 
     public void escalateToCritical(IncidentTicket t) {
         // BAD: mutating ticket after it has been "created"
-        t.setPriority("CRITICAL");
-        t.getTags().add("ESCALATED"); // list leak
+        t.toBuilder().setPriority("CRITICAL")
+        .setTags(appendTag(t.getTags(),"ESCALATED")).build(); // list leak
+    }
+    private List<String> appendTag(List<String> oldTags, String newTag) {
+        return new java.util.ArrayList<>(oldTags) {{
+            add(newTag);
+        }};
     }
 
     public void assign(IncidentTicket t, String assigneeEmail) {
         // scattered validation
-        if (assigneeEmail != null && !assigneeEmail.contains("@")) {
-            throw new IllegalArgumentException("assigneeEmail invalid");
-        }
-        t.setAssigneeEmail(assigneeEmail);
+        // if (assigneeEmail != null && !assigneeEmail.contains("@")) {
+        //     throw new IllegalArgumentException("assigneeEmail invalid");
+        // }
+        t.toBuilder().setAssigneeEmail(assigneeEmail);
     }
 }
