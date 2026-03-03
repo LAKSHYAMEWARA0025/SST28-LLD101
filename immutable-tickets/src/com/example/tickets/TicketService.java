@@ -40,9 +40,9 @@ public class TicketService {
         //without creating an instance of the outer class
     }
 
-    public void escalateToCritical(IncidentTicket t) {
+    public IncidentTicket escalateToCritical(IncidentTicket t) {
         // BAD: mutating ticket after it has been "created"
-        t.toBuilder().setPriority("CRITICAL")
+        return t.toBuilder().setPriority("CRITICAL")
         .setTags(appendTag(t.getTags(),"ESCALATED")).build(); // list leak
     }
     private List<String> appendTag(List<String> oldTags, String newTag) {
@@ -51,11 +51,11 @@ public class TicketService {
         }};
     }
 
-    public void assign(IncidentTicket t, String assigneeEmail) {
+    public IncidentTicket assign(IncidentTicket t, String assigneeEmail) {
         // scattered validation
         // if (assigneeEmail != null && !assigneeEmail.contains("@")) {
         //     throw new IllegalArgumentException("assigneeEmail invalid");
         // }
-        t.toBuilder().setAssigneeEmail(assigneeEmail);
+        return t.toBuilder().setAssigneeEmail(assigneeEmail).build();
     }
 }
