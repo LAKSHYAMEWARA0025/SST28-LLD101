@@ -1,10 +1,20 @@
 public class EvaluationPipeline {
     // DIP violation: high-level module constructs concretes directly
+    private Plagarism pc;
+    private Rub rubric;
+    private Grader grader;
+    private Writer writer;
+    public EvaluationPipeline(Plagarism pc,Rub rubric,Grader grader,Writer writer){
+        this.pc=pc;
+        this.rubric=rubric;
+        this.grader=grader;
+        this.writer=writer;
+    }
     public void evaluate(Submission sub) {
-        Rubric rubric = new Rubric();
-        PlagiarismChecker pc = new PlagiarismChecker();
-        CodeGrader grader = new CodeGrader();
-        ReportWriter writer = new ReportWriter();
+        // rubric = ;
+        // pc = new PlagiarismChecker();
+        // grader = new CodeGrader();
+        // writer = new ReportWriter();
 
         int plag = pc.check(sub);
         System.out.println("PlagiarismScore=" + plag);
@@ -20,3 +30,4 @@ public class EvaluationPipeline {
         System.out.println("FINAL: " + result + " (total=" + total + ")");
     }
 }
+//we need to create interfaces and instead of passing objects directly we need to pass their refrences!!
