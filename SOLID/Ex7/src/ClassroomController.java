@@ -9,7 +9,7 @@ public class ClassroomController {
         pjPower.powerOn();
         pj.connectInput("HDMI-1");
 
-        BrightnessController lights = reg.getByCapability(BrightnessController.class);
+        BrightnessController lights = reg.getByCapability(BrightnessController.class);//essi class jo brightnessController ko implement krti ho
         lights.setBrightness(60);
 
         TemperaturController ac = reg.getByCapability(TemperaturController.class);
