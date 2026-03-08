@@ -19,20 +19,8 @@ public class ReportFile {
         this.reportId = reportId;
         this.title = title;
         this.classification = classification;
-    }
-
-    public void display(User user) {
-        String content = loadFromDisk();
-        System.out.println("REPORT -> id=" + reportId
-                + " title=" + title
-                + " classification=" + classification
-                + " openedBy=" + user.getName());
-        System.out.println("CONTENT: " + content);
-    }
-
-    private String loadFromDisk() {
-        System.out.println("[disk] loading report " + reportId + " ...");
-        try { Thread.sleep(120); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-        return "Internal report body for " + title;
-    }
+    }    
 }
+//NO USE OF THIS FILE
+//WHAT IS HAPPENING IN THIS WE HAVE PUT ALL THE CHECKING AND ALL OF IT IN REPORTPROXY AND ONCE WE GET ALL THESE THINGS WE CHECK
+//IF THIS FILE IS STORED IN REALREPORT, IF NOT WE WILL SAVE IT LAZILY AND RETURN FROM THERE OR ELSE WE WILL RETURN IT DIRECTLY!!
