@@ -30,14 +30,14 @@ public class MapDataSource {
             double lat = 12.9000 + rnd.nextDouble() * 0.2000;
             double lng = 77.5000 + rnd.nextDouble() * 0.2000;
             String label = "M-" + i;
-
             // Force many duplicates by choosing from small pools
             String shape = SHAPES[rnd.nextInt(SHAPES.length)];
             String color = COLORS[rnd.nextInt(COLORS.length)];
             int size = SIZES[rnd.nextInt(SIZES.length)];
             boolean filled = rnd.nextBoolean();
+            MarkerStyle style=MarkerStyleFactory.get(shape, color, size, filled);
 
-            out.add(new MapMarker(lat, lng, label, shape, color, size, filled));
+            out.add(new MapMarker(lat, lng, label,style ));
         }
         return out;
     }
