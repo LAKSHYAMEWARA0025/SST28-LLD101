@@ -1,0 +1,77 @@
+@startuml
+
+class ParkingLot {
+  - levels: List<Level>
+  - strategy: ISlotStrategy
+  + park(vehicle: Vehicle, gate: EntryGate): Ticket
+  + exit(ticket: Ticket): double
+}
+
+class Level {
+  - id: int
+  - slots: List<Slot>
+}
+
+class Slot {
+  - slotId: int
+  - slotType: SlotType
+  - hourlyRate: double
+  - isOccupied: boolean
+}
+
+enum SlotType {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+class Vehicle {
+  - vehicleNumber: String
+  - vehicleType: SlotType
+}
+
+class EntryGate {
+  - gateId: int
+  - distanceMap: Map<Slot, int>
+}
+
+interface ISlotStrategy {
+  + findSlot(vehicle: Vehicle, gate: EntryGate, levels: List<Level>): Slot
+}
+
+class NearestSlotStrategy {
+  + findSlot(vehicle: Vehicle, gate: EntryGate, levels: List<Level>): Slot
+}
+
+class Ticket {
+  - vehicle: Vehicle
+  - slot: Slot
+  - entryTime: LocalDateTime
+}
+
+class Invoice {
+  - amount: double
+  - entryTime: LocalDateTime
+  - exitTime: LocalDateTime
+}
+
+class InvoiceGenerator {
+  + generate(ticket: Ticket): Invoice
+}
+
+class Payment {
+  + calculateAmount(ticket: Ticket): double
+}
+
+ParkingLot --> Level
+Level --> Slot
+ParkingLot --> ISlotStrategy
+ISlotStrategy <|-- NearestSlotStrategy
+ParkingLot --> Ticket
+ParkingLot --> EntryGate
+Ticket --> Vehicle
+Ticket --> Slot
+InvoiceGenerator --> Invoice
+Payment --> Invoice
+
+@enduml
