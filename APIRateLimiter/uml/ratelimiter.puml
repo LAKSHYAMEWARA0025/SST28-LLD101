@@ -1,0 +1,53 @@
+@startuml
+
+class Client {
+  +int time
+  +String clientId
+  +Client(int time, String c)
+}
+
+interface ILimitStrategy {
+  +allowRequest(Client client): boolean
+}
+
+class fixedWindowStrategy {
+  -int currtime
+  -int endtime
+  -int finalcount
+  -Queue<Client> q
+  +allowRequest(Client c): boolean
+}
+
+class movingWindowStrategy {
+  -int windowSize
+  -int maxRequests
+  -Map<String, Queue<Integer>> map
+  +allowRequest(Client c): boolean
+}
+
+class RateLimiterProxy {
+  -RemoteResource rr
+  -ILimitStrategy strategy
+  +generate(Client client): void
+}
+
+class RemoteResource {
+  +generate(String id): void
+}
+
+class Main {
+  +main(String[] args): void
+}
+
+' Relationships
+ILimitStrategy <|.. fixedWindowStrategy
+ILimitStrategy <|.. movingWindowStrategy
+
+RateLimiterProxy --> ILimitStrategy
+RateLimiterProxy --> RemoteResource
+
+RateLimiterProxy --> Client : uses
+Main --> Client : creates
+Main --> RateLimiterProxy : uses
+
+@enduml
