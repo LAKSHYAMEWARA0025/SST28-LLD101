@@ -1,0 +1,88 @@
+@startuml
+
+'================ ENUMS =================
+enum Direction {
+  UP
+  DOWN
+}
+
+enum ElevatorState {
+  IDLE
+  MOVING_UP
+  MOVING_DOWN
+  MAINTENANCE
+}
+
+'================ CORE SYSTEM =================
+class ElevatorSystem {
+  - elevators: List<Elevator>
+  - strategy: IElevatorStrategy
+  + handleExternalRequest(req: ExternalRequest)
+  + handleInternalRequest(req: InternalRequest)
+}
+
+class Elevator {
+  - id: int
+  - currentFloor: int
+  - direction: Direction
+  - state: ElevatorState
+  - requests: List<Integer>
+  - currentWeight: double
+  - maxWeight: double
+  + move()
+  + addRequest(floor: int)
+  + openDoor()
+  + closeDoor()
+}
+
+'================ REQUESTS =================
+class ExternalRequest {
+  - floor: int
+  - direction: Direction
+}
+
+class InternalRequest {
+  - floor: int
+}
+
+'================ STRATEGY =================
+interface IElevatorStrategy {
+  + assignElevator(req: ExternalRequest, elevators: List<Elevator>): Elevator
+}
+
+class NearestElevatorStrategy {
+  + assignElevator(req: ExternalRequest, elevators: List<Elevator>): Elevator
+}
+
+IElevatorStrategy <|-- NearestElevatorStrategy
+
+'================ PANELS =================
+class ExternalButtonPanel {
+  + pressButton(floor: int, direction: Direction)
+}
+
+class InternalButtonPanel {
+  + pressFloorButton(floor: int)
+  + pressOpen()
+  + pressClose()
+  + pressAlarm()
+}
+
+'================ OPERATOR =================
+class Operator {
+  + addFloor()
+  + setMaintenance(elevator: Elevator)
+}
+
+'================ RELATIONSHIPS =================
+ElevatorSystem --> Elevator
+ElevatorSystem --> IElevatorStrategy
+ElevatorSystem --> ExternalRequest
+ElevatorSystem --> InternalRequest
+
+ExternalButtonPanel --> ElevatorSystem
+InternalButtonPanel --> ElevatorSystem
+
+Operator --> Elevator
+
+@enduml
