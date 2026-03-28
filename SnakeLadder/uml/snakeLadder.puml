@@ -1,0 +1,75 @@
+@startuml
+
+class Player {
+  -String name
+  -int position
+  +move(int steps)
+}
+
+class Board {
+  -int size
+  -List<BoardObject> objects
+  +applyMove(int position): int
+}
+
+interface BoardObject {
+  +apply(int position): int
+}
+
+class Snake {
+  -int head
+  -int tail
+  +apply(int position): int
+}
+
+class Ladder {
+  -int start
+  -int end
+  +apply(int position): int
+}
+
+class Dice {
+  +roll(): int
+}
+
+interface IStrategy {
+  +canPlay(Player player, int diceValue): boolean
+}
+
+class EasyStrategy {
+  +canPlay(Player player, int diceValue): boolean
+}
+
+class MediumStrategy {
+  -Map<Player, Integer> sixCount
+  +canPlay(Player player, int diceValue): boolean
+}
+
+class Game {
+  -List<Player> players
+  -Board board
+  -Dice dice
+  -IStrategy strategy
+  +start()
+}
+
+class Main {
+  +main(String[]): void
+}
+
+BoardObject <|.. Snake
+BoardObject <|.. Ladder
+
+IStrategy <|.. EasyStrategy
+IStrategy <|.. MediumStrategy
+
+Game --> Player
+Game --> Board
+Game --> Dice
+Game --> IStrategy
+
+Board --> BoardObject
+
+Main --> Game
+
+@enduml
